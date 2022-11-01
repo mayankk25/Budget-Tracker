@@ -36,6 +36,13 @@ class LoginFragment: Fragment() {
             val password = binding.editTextTextPassword.text.toString()
             createAccount(email, password)
         }
+
+        binding.SignInButton.setOnClickListener {
+            val email = binding.editTextTextEmailAddress.text.toString()
+            val password = binding.editTextTextPassword.text.toString()
+            signIn(email, password)
+        }
+
         auth = Firebase.auth
         return binding.root
     }
@@ -59,6 +66,24 @@ class LoginFragment: Fragment() {
             } else {
                 // If sign in fails, display a message to the user.
                 Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                Toast.makeText(context, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show()
+                //updateUI(null)
+            }
+        }
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+    }
+
+    private fun signIn(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity()) { task ->
+            if (task.isSuccessful) {
+                // Sign in success, update UI with the signed-in user's information
+                Log.d(TAG, "signInWithEmail:success")
+                val user = auth.currentUser
+                //updateUI(user)
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "signInWithEmail:failure", task.exception)
                 Toast.makeText(context, "Authentication failed.",
                     Toast.LENGTH_SHORT).show()
                 //updateUI(null)
