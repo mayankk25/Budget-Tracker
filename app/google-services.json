@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "490231183706",
+    "project_id": "budgettrackerapp-853f8",
+    "storage_bucket": "budgettrackerapp-853f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490231183706:android:acc1282e9c8b12aae51b63",
+        "android_client_info": {
+          "package_name": "com.example.budgettracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490231183706-86u9pk65ei4dh44lll8r6pa85dp5pj2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.budgettracker",
+            "certificate_hash": "17dd2630e288d8b7c18a1a79722a9720cb455c81"
+          }
+        },
+        {
+          "client_id": "490231183706-k94moujo1iof5orjt53krjaqklrr4gg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmxRBqcC2n2VQHJdsDL5d2209FndrRU14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490231183706-k94moujo1iof5orjt53krjaqklrr4gg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
