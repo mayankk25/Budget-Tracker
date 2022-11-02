@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.budgettracker.databinding.LoginFragmentBinding
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.budgettracker.databinding.MainFragmentBinding
 
 class MainFragment: Fragment() {

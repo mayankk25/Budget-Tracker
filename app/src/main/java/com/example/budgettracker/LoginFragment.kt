@@ -43,7 +43,9 @@ class LoginFragment: Fragment() {
             signIn(email, password)
         }
 
+        //Initialize Firebase
         auth = Firebase.auth
+
         return binding.root
     }
 
@@ -81,6 +83,7 @@ class LoginFragment: Fragment() {
                 Log.d(TAG, "signInWithEmail:success")
                 val user = auth.currentUser
                 //updateUI(user)
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
             } else {
                 // If sign in fails, display a message to the user.
                 Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -89,6 +92,5 @@ class LoginFragment: Fragment() {
                 //updateUI(null)
             }
         }
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
     }
 }
