@@ -19,11 +19,13 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class LoginFragment: Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    val db = Firebase.firestore
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -32,9 +34,7 @@ class LoginFragment: Fragment() {
             R.layout.login_fragment, container, false)
 
         binding.CreateAccountButton.setOnClickListener {
-            val email = binding.editTextTextEmailAddress.text.toString()
-            val password = binding.editTextTextPassword.text.toString()
-            createAccount(email, password)
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
         }
 
         binding.SignInButton.setOnClickListener {
@@ -56,24 +56,6 @@ class LoginFragment: Fragment() {
         if(currentUser != null){
             currentUser?.reload();
         }
-    }
-
-    private fun createAccount(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity()) { task ->
-            if (task.isSuccessful) {
-                // Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "createUserWithEmail:success")
-                val user = auth.currentUser
-                //updateUI(user)
-            } else {
-                // If sign in fails, display a message to the user.
-                Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                Toast.makeText(context, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show()
-                //updateUI(null)
-            }
-        }
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
     }
 
     private fun signIn(email: String, password: String) {

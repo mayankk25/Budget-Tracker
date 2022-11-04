@@ -1,7 +1,9 @@
 package com.example.budgettracker
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 
