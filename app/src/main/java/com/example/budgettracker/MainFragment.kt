@@ -30,19 +30,20 @@ class MainFragment: Fragment() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
         binding.textView.text = currentUser?.email.toString()
-//        val docRef = db.collection("users").whereEqualTo("uid", currentUser?.uid)
-//            .get()
-//            .addOnSuccessListener {
-//                if (!it.isEmpty) {
-//                    for (doc in it) {
-//
-//                    }
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents: ", exception)
-//            }
-//        binding.userName.text = docRef
+
+        //get data from firestore
+        db.collection("users").whereEqualTo("id", currentUser?.uid.toString())
+            .get()
+            .addOnSuccessListener {
+                if (!it.isEmpty) {
+                    for (doc in it) {
+                        binding.userName.text = doc.data.getValue("name").toString()
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
 
         return binding.root
     }
