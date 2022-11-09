@@ -22,7 +22,11 @@
         android:id="@+id/mainFragment"
         android:name="com.example.budgettracker.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_addExpenseFragment2"
+            app:destination="@id/addExpenseFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
         android:name="com.example.budgettracker.CreateAccountFragment"
@@ -30,6 +34,15 @@
         tools:layout="@layout/create_account_fragment" >
         <action
             android:id="@+id/action_createAccountFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addExpenseFragment2"
+        android:name="com.example.budgettracker.AddExpenseFragment"
+        android:label="AddExpenseFragment"
+        tools:layout="@layout/add_expense_fragment">
+        <action
+            android:id="@+id/action_addExpenseFragment2_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

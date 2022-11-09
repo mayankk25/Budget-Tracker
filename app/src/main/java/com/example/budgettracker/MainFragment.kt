@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.budgettracker.databinding.MainFragmentBinding
@@ -20,6 +21,7 @@ class MainFragment: Fragment() {
     private val TAG = "MainFragment"
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var viewModel: MainFragmentViewModel
     val db = Firebase.firestore
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -30,6 +32,8 @@ class MainFragment: Fragment() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
         binding.textView.text = currentUser?.email.toString()
+
+        viewModel = ViewModelProvider(this).get(MainFragmentViewModel::class.java)
 
         //get data from firestore
         db.collection("users").whereEqualTo("id", currentUser?.uid.toString())
@@ -44,6 +48,10 @@ class MainFragment: Fragment() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
+
+        binding.addExpenseButton.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToAddExpenseFragment2())
+        }
 
         return binding.root
     }
