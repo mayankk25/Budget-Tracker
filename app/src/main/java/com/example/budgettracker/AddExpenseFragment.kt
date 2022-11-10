@@ -9,9 +9,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.budgettracker.database.Expense
 import com.example.budgettracker.databinding.AddExpenseFragmentBinding
-import com.example.budgettracker.databinding.LoginFragmentBinding
-import com.example.budgettracker.databinding.MainFragmentBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -49,11 +48,18 @@ class AddExpenseFragment: Fragment() {
     }
 
     fun addExpense(binding: AddExpenseFragmentBinding, auth: FirebaseAuth) {
-        val expenseData = hashMapOf(
-            "title" to binding.expenseTitle.text.toString(),
-            "amount" to binding.expenseAmount.text.toString(),
-            "description" to binding.expenseDescription.text.toString(),
-            "userID" to auth.currentUser?.uid
+//        val expenseData = hashMapOf(
+//            "title" to binding.expenseTitle.text.toString(),
+//            "amount" to binding.expenseAmount.text.toString(),
+//            "description" to binding.expenseDescription.text.toString(),
+//            "userID" to auth.currentUser?.uid
+//        )
+
+        val expenseData = Expense(
+            "${auth.currentUser?.uid}",
+            "${binding.expenseTitle.text}",
+            binding.expenseAmount.text.toString().toDouble(), //amount
+            "${binding.expenseDescription.text}"
         )
 
         db.collection("expenses")

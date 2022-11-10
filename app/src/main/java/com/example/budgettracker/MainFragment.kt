@@ -6,14 +6,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.budgettracker.database.Expense
 import com.example.budgettracker.databinding.MainFragmentBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -22,7 +27,9 @@ class MainFragment: Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var viewModel: MainFragmentViewModel
-    val db = Firebase.firestore
+    private var db = Firebase.firestore
+
+    private lateinit var expenseList: ArrayList<Expense>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -31,7 +38,6 @@ class MainFragment: Fragment() {
 
         auth = Firebase.auth
         val currentUser = auth.currentUser
-        binding.textView.text = currentUser?.email.toString()
 
         viewModel = ViewModelProvider(this).get(MainFragmentViewModel::class.java)
 
@@ -52,6 +58,30 @@ class MainFragment: Fragment() {
         binding.addExpenseButton.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToAddExpenseFragment2())
         }
+
+        db = FirebaseFirestore.getInstance()
+
+        Log.i(TAG, "Before getting expenses")
+        expenseList = arrayListOf()
+        db.collection("expenses")
+            .get()
+            .addOnSuccessListener {
+                Log.i(TAG, "in On Success")
+                if(!it.isEmpty) {
+                    for (data in it.documents) {
+                        val expense: Expense? = data.toObject(Expense::class.java)
+                        if (expense != null) {
+                            expenseList.add(expense)
+                        }
+                    }
+                    Log.i(TAG, "After fetching date $expenseList")
+                    binding.budgetList.adapter = ExpenseAdapter(expenseList)
+                }
+                Log.i(TAG, "After adapter")
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
 
         return binding.root
     }
