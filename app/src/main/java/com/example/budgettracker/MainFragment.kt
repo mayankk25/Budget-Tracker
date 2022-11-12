@@ -63,10 +63,9 @@ class MainFragment: Fragment() {
 
         Log.i(TAG, "Before getting expenses")
         expenseList = arrayListOf()
-        db.collection("expenses")
+        db.collection("expenses").whereEqualTo("userID", currentUser?.uid.toString())
             .get()
             .addOnSuccessListener {
-                Log.i(TAG, "in On Success")
                 if(!it.isEmpty) {
                     for (data in it.documents) {
                         val expense: Expense? = data.toObject(Expense::class.java)
@@ -74,10 +73,8 @@ class MainFragment: Fragment() {
                             expenseList.add(expense)
                         }
                     }
-                    Log.i(TAG, "After fetching date $expenseList")
                     binding.budgetList.adapter = ExpenseAdapter(expenseList)
                 }
-                Log.i(TAG, "After adapter")
             }
             .addOnFailureListener {
                 Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()

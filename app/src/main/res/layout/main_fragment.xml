@@ -60,16 +60,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/budget_list"
-            android:layout_width="412dp"
-            android:layout_height="499dp"
+            android:layout_width="392dp"
+            android:layout_height="508dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/addExpenseButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_name"
-            app:layout_constraintVertical_bias="0.476"
-            tools:listitem="@layout/text_item_view"/>
+            app:layout_constraintVertical_bias="0.562"
+            tools:listitem="@layout/text_item_view" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
