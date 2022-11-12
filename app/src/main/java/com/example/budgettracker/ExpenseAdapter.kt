@@ -14,9 +14,9 @@ import java.util.concurrent.RecursiveAction
 class ExpenseAdapter(private val expenseList: ArrayList<Expense>): RecyclerView.Adapter<ExpenseAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val titleText: TextView = itemView.findViewById(R.id.textView)
-        val amountText: TextView = itemView.findViewById(R.id.textView2)
-        val descriptionText: TextView = itemView.findViewById(R.id.textView3)
+        val titleText: TextView = itemView.findViewById(R.id.list_expense_title)
+        val amountText: TextView = itemView.findViewById(R.id.list_expense_amount)
+        val descriptionText: TextView = itemView.findViewById(R.id.list_expense_description)
     }
 
     override fun getItemCount() = expenseList.size

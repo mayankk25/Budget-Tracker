@@ -1,5 +1,7 @@
 package com.example.budgettracker.database
 
+import java.text.SimpleDateFormat
+
 data class Expense(
     //var expenseID: Long,
     var userID: String? = null,
