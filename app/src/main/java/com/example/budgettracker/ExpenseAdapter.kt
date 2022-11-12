@@ -26,7 +26,7 @@ class ExpenseAdapter(private val expenseList: ArrayList<Expense>): RecyclerView.
         //holder.textView.text = item.title.toString()
         holder.titleText.text = item.title
         holder.amountText.text = item.amount.toString()
-        holder.descriptionText.text = item.description
+        holder.descriptionText.text = item.date
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

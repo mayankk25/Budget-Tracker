@@ -1,6 +1,7 @@
 package com.example.budgettracker
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.budgettracker.database.Expense
 import com.example.budgettracker.databinding.AddExpenseFragmentBinding
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddExpenseFragment: Fragment() {
 
@@ -33,6 +39,24 @@ class AddExpenseFragment: Fragment() {
 
         binding.submitButton.setOnClickListener{
             addExpense(binding, auth)
+        }
+
+        val items = arrayOf("Food", "Transportation", "Entertainment", "Education", "Health", "Self-Development", "Other")
+        (binding.expenseMenu.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(items)
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select date")
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+
+        binding.pickDateButton.setOnClickListener {
+            datePicker.show(childFragmentManager,"DATE_PICKER")
+        }
+
+        datePicker.addOnPositiveButtonClickListener {
+            val format = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+            val editable = Editable.Factory.getInstance().newEditable(format.format(datePicker.selection))
+            binding.expenseDate.editText?.text = editable
         }
 
         return binding.root
@@ -54,12 +78,15 @@ class AddExpenseFragment: Fragment() {
 //            "description" to binding.expenseDescription.text.toString(),
 //            "userID" to auth.currentUser?.uid
 //        )
+//        val formatter = SimpleDateFormat("dd-mm-yyyy")
+//        val date = formatter.parse(binding.expenseDate.editText?.text.toString())
 
         val expenseData = Expense(
             "${auth.currentUser?.uid}",
-            "${binding.expenseTitle.text}",
-            binding.expenseAmount.text.toString().toDouble(), //amount
-            "${binding.expenseDescription.text}"
+            "${binding.expenseTitle.editText?.text.toString()}",
+            binding.expenseAmount.editText?.text.toString().toDouble(), //amount
+        "${binding.expenseMenu.editText?.text.toString()}",
+            "${binding.expenseDate.editText?.text.toString()}"
         )
 
         db.collection("expenses")
