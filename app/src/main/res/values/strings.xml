@@ -6,7 +6,7 @@
     <string name="create_account">Create Account</string>
     <string name="add_expense">Add Expense</string>
     <string name="name_hint">Name</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Welcome,</string>
     <string name="add_expense_details">Add Expense Details</string>
     <string name="title_hint">Title</string>
     <string name="amount_hint">Amount</string>

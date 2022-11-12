@@ -25,6 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
+            android:fontFamily="@font/product_sans_regular"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/addExpenseButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.036"
@@ -38,6 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
+            android:textColor="@color/black"
+            android:fontFamily="@font/product_sans_bold"
             android:textSize="34sp"
             app:layout_constraintBottom_toTopOf="@+id/addExpenseButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,17 +50,37 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.026" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Note: A RecyclerView can also be used -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="100dp"
+            android:clipToPadding="false">
+
+            <!-- Scrollable content -->
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:menu="@menu/bottom_navigation_menu" />
+            android:layout_gravity="bottom"
+            style="@style/Widget.Material3.BottomAppBar"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/bottomAppBar"
+            />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/budget_list"
