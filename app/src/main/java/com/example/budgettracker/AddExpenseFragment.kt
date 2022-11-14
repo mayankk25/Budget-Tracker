@@ -59,6 +59,10 @@ class AddExpenseFragment: Fragment() {
             binding.expenseDate.editText?.text = editable
         }
 
+        binding.addExpenseTopAppBar.setNavigationOnClickListener {
+            findNavController().navigate(AddExpenseFragmentDirections.actionAddExpenseFragment2ToMainFragment())
+        }
+
         return binding.root
     }
 
