@@ -30,6 +30,7 @@ class MainFragment: Fragment() {
     private var db = Firebase.firestore
 
     private lateinit var expenseList: ArrayList<Expense>
+    private var total: Double = 0.0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -63,6 +64,7 @@ class MainFragment: Fragment() {
 
         Log.i(TAG, "Before getting expenses")
         expenseList = arrayListOf()
+
         db.collection("expenses")
             .whereEqualTo("userID", currentUser?.uid.toString())
             .get()
@@ -72,8 +74,10 @@ class MainFragment: Fragment() {
                         val expense: Expense? = data.toObject(Expense::class.java)
                         if (expense != null) {
                             expenseList.add(expense)
+                            total += expense.amount!!
                         }
                     }
+                    binding.totalExpenseAmount.text = total.toString()
                     binding.budgetList.adapter = ExpenseAdapter(expenseList)
                 }
             }
