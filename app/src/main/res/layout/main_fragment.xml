@@ -25,6 +25,37 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="Mayank" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="364dp"
+            android:layout_height="190dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/material95"
+            app:layout_constraintBottom_toTopOf="@+id/recent_transactions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.41"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"
+            app:layout_constraintVertical_bias="0.19999999">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/total_expense_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/add_expense"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:textSize="25dp">
+
+                </TextView>
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView
             android:id="@+id/recent_transactions"
             android:layout_width="wrap_content"
@@ -80,11 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingBottom="100dp">
-
-                <!-- Scrollable content -->
-
-            </androidx.core.widget.NestedScrollView>
+                android:paddingBottom="100dp" />
 
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/bottomAppBar"

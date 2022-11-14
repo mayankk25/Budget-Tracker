@@ -63,7 +63,8 @@ class MainFragment: Fragment() {
 
         Log.i(TAG, "Before getting expenses")
         expenseList = arrayListOf()
-        db.collection("expenses").whereEqualTo("userID", currentUser?.uid.toString())
+        db.collection("expenses")
+            .whereEqualTo("userID", currentUser?.uid.toString())
             .get()
             .addOnSuccessListener {
                 if(!it.isEmpty) {
