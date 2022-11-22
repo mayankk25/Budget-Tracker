@@ -25,33 +25,117 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="Mayank" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="364dp"
-            android:layout_height="190dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardBackgroundColor="@color/material95"
-            app:layout_constraintBottom_toTopOf="@+id/recent_transactions"
+        <TextView
+            android:id="@+id/total_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/total_balance"
+            android:textAlignment="center"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_name"
-            app:layout_constraintVertical_bias="0.19999999">
+            app:layout_constraintVertical_bias="0.06999999" />
+
+        <TextView
+            android:id="@+id/total_balance_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/total_balance"
+            app:layout_constraintVertical_bias="0.06999999" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView6"
+            android:layout_width="163dp"
+            android:layout_height="84dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/material95"
+            app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+            app:layout_constraintEnd_toStartOf="@+id/materialCardView"
+            app:layout_constraintStart_toEndOf="@+id/budget_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/income"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:text="@string/income"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/income_valu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+
+                    android:fontFamily="@font/product_sans_bold"
+                    android:textSize="35dp"
+                    tools:text="5000" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="163dp"
+            android:layout_height="84dp"
+            android:layout_marginStart="16dp"
+            app:cardBackgroundColor="@color/material95"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/budget_list"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/materialCardView6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.38"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Expenses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:text="Expenses"
+                    android:textSize="18dp"></TextView>
+
                 <TextView
                     android:id="@+id/total_expense_amount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
                     android:fontFamily="@font/product_sans_bold"
-                    android:textSize="40dp"
-                    android:layout_margin="16dp"
-                    tools:text="5000">
-
-                </TextView>
+                    android:textSize="35dp"
+                    tools:text="5000"></TextView>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -110,7 +194,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingBottom="100dp" />
+                android:paddingBottom="100dp">
+
+            </androidx.core.widget.NestedScrollView>
 
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/bottomAppBar"
