@@ -78,7 +78,8 @@ class MainFragment: Fragment() {
                         }
                     }
                     binding.totalExpenseAmount.text = total.toString()
-                    binding.budgetList.adapter = ExpenseAdapter(expenseList)
+                    binding.budgetList.adapter =
+                        context?.let { it1 -> ExpenseAdapter(expenseList, it1) }
                 }
             }
             .addOnFailureListener {
