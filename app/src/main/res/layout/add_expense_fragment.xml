@@ -10,21 +10,6 @@
         android:layout_height="match_parent">
 
 
-        <Button
-            android:id="@+id/submitButton"
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="@string/submit"
-            app:icon="@drawable/ic_baseline_done_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.106"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expenseDate"
-            app:layout_constraintVertical_bias="0.116" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/expenseTitle"
             android:layout_width="350dp"
@@ -57,7 +42,7 @@
             app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/expenseTitle"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.00999999">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -80,7 +65,7 @@
             app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/expenseAmount"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.01999998">
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
@@ -91,27 +76,26 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/expenseDate"
-            android:layout_width="210dp"
+            android:layout_width="350dp"
             android:layout_height="58dp"
             android:layout_margin="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:clickable="false"
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:hint="@string/date_hint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/expenseMenu"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.01999998">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="208dp"
+                android:id="@+id/expense_date_input"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -121,17 +105,18 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/pick_date_button"
+            android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="@string/select_date"
+            android:layout_marginBottom="16dp"
+            android:text="@string/submit"
+            app:icon="@drawable/ic_baseline_done_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toEndOf="@+id/expenseDate"
-            app:layout_constraintTop_toBottomOf="@+id/expenseMenu"
-            app:layout_constraintVertical_bias="0.050000012" />
+            app:layout_constraintHorizontal_bias="0.106"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expenseDate"
+            app:layout_constraintVertical_bias="0.086" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

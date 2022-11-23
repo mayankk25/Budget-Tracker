@@ -50,7 +50,7 @@ class AddExpenseFragment: Fragment() {
             .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
             .build()
 
-        binding.pickDateButton.setOnClickListener {
+        binding.expenseDateInput.setOnClickListener {
             datePicker.show(childFragmentManager,"DATE_PICKER")
         }
 
