@@ -7,6 +7,8 @@ import com.google.firebase.ktx.Firebase
 
 class MainFragmentViewModel: ViewModel() {
 
+    var total: Double = 0.0
+
     override fun onCleared() {
         super.onCleared()
         Log.i("MainFragmentViewModel", "MainFragmentViewModel destroyed!")

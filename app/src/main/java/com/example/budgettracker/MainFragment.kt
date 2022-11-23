@@ -30,7 +30,6 @@ class MainFragment: Fragment() {
     private var db = Firebase.firestore
 
     private lateinit var expenseList: ArrayList<Expense>
-    private var total: Double = 0.0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -57,7 +56,8 @@ class MainFragment: Fragment() {
             }
 
         binding.addExpenseButton.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToAddExpenseFragment2())
+            //findNavController().navigate(MainFragmentDirections.actionMainFragmentToAddExpenseFragment2())
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToAddTransactionFragment())
         }
 
         db = FirebaseFirestore.getInstance()
@@ -65,19 +65,21 @@ class MainFragment: Fragment() {
         Log.i(TAG, "Before getting expenses")
         expenseList = arrayListOf()
 
+        //getting all the expenses
         db.collection("expenses")
             .whereEqualTo("userID", currentUser?.uid.toString())
             .get()
             .addOnSuccessListener {
                 if(!it.isEmpty) {
+                    viewModel.total = 0.0 // adding this to make sure that everytime going back the expenses do not double
                     for (data in it.documents) {
                         val expense: Expense? = data.toObject(Expense::class.java)
                         if (expense != null) {
                             expenseList.add(expense)
-                            total += expense.amount!!
+                            viewModel.total += expense.amount!!
                         }
                     }
-                    binding.totalExpenseAmount.text = total.toString()
+                    binding.totalExpenseAmount.text = viewModel.total.toString()
                     binding.budgetList.adapter =
                         context?.let { it1 -> ExpenseAdapter(expenseList, it1) }
                 }

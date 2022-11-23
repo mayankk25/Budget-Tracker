@@ -14,6 +14,7 @@ import com.example.budgettracker.database.Expense
 import com.example.budgettracker.databinding.AddExpenseFragmentBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -59,10 +60,6 @@ class AddExpenseFragment: Fragment() {
             binding.expenseDate.editText?.text = editable
         }
 
-        binding.addExpenseTopAppBar.setNavigationOnClickListener {
-            findNavController().navigate(AddExpenseFragmentDirections.actionAddExpenseFragment2ToMainFragment())
-        }
-
         return binding.root
     }
 
@@ -76,14 +73,6 @@ class AddExpenseFragment: Fragment() {
     }
 
     fun addExpense(binding: AddExpenseFragmentBinding, auth: FirebaseAuth) {
-//        val expenseData = hashMapOf(
-//            "title" to binding.expenseTitle.text.toString(),
-//            "amount" to binding.expenseAmount.text.toString(),
-//            "description" to binding.expenseDescription.text.toString(),
-//            "userID" to auth.currentUser?.uid
-//        )
-//        val formatter = SimpleDateFormat("dd-mm-yyyy")
-//        val date = formatter.parse(binding.expenseDate.editText?.text.toString())
 
         val expenseData = Expense(
             "${auth.currentUser?.uid}",
@@ -98,7 +87,7 @@ class AddExpenseFragment: Fragment() {
             .addOnSuccessListener { documentReference ->
                 Log.i(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
                 Toast.makeText(context, "Added expense.", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(AddExpenseFragmentDirections.actionAddExpenseFragment2ToMainFragment())
+                findNavController().navigate(AddTransactionFragmentDirections.actionAddTransactionFragmentToMainFragment())
             }
             .addOnFailureListener { e ->
                 Log.i(TAG, "Error adding document", e)
