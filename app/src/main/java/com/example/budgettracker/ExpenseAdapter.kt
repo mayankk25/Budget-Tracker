@@ -1,25 +1,18 @@
 package com.example.budgettracker
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Color.red
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.app.NotificationCompat.getColor
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
-import com.example.budgettracker.database.Expense
-import com.google.android.material.color.MaterialColors.getColor
+import com.example.budgettracker.database.Transaction
 
 
-class ExpenseAdapter(private val expenseList: ArrayList<Expense>, private val context: Context):
+class ExpenseAdapter(private val expenseList: ArrayList<Transaction>, private val context: Context):
     RecyclerView.Adapter<ExpenseAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

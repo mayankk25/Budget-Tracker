@@ -7,7 +7,8 @@ import com.google.firebase.ktx.Firebase
 
 class MainFragmentViewModel: ViewModel() {
 
-    var total: Double = 0.0
+    var expenseTotal: Double = 0.0
+    var incomeTotal: Double = 0.0
 
     override fun onCleared() {
         super.onCleared()

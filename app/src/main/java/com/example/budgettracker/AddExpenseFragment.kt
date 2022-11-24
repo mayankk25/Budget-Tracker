@@ -10,11 +10,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.budgettracker.database.Expense
+import com.example.budgettracker.database.Transaction
 import com.example.budgettracker.databinding.AddExpenseFragmentBinding
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -74,15 +72,16 @@ class AddExpenseFragment: Fragment() {
 
     fun addExpense(binding: AddExpenseFragmentBinding, auth: FirebaseAuth) {
 
-        val expenseData = Expense(
+        val expenseData = Transaction(
             "${auth.currentUser?.uid}",
             "${binding.expenseTitle.editText?.text.toString()}",
             binding.expenseAmount.editText?.text.toString().toDouble(), //amount
         "${binding.expenseMenu.editText?.text.toString()}",
-            "${binding.expenseDate.editText?.text.toString()}"
+            "${binding.expenseDate.editText?.text.toString()}",
+            "Expense"
         )
 
-        db.collection("expenses")
+        db.collection("transactions")
             .add(expenseData)
             .addOnSuccessListener { documentReference ->
                 Log.i(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")

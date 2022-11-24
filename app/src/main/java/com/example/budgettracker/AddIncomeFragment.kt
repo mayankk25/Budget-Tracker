@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.budgettracker.database.Expense
+import com.example.budgettracker.database.Transaction
 import com.example.budgettracker.databinding.AddIncomeFragmentBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -67,16 +67,17 @@ class AddIncomeFragment: Fragment() {
         }
     }
 
-    public fun addIncome(binding: AddIncomeFragmentBinding, auth: FirebaseAuth) {
-        val incomeData = Expense(
+    fun addIncome(binding: AddIncomeFragmentBinding, auth: FirebaseAuth) {
+        val incomeData = Transaction(
             "${auth.currentUser?.uid}",
             "${binding.incomeTitle.editText?.text.toString()}",
             binding.incomeAmount.editText?.text.toString().toDouble(), //amount
             "${binding.incomeMenu.editText?.text.toString()}",
-            "${binding.incomeDate.editText?.text.toString()}"
+            "${binding.incomeDate.editText?.text.toString()}",
+            "Income"
         )
 
-        db.collection("income")
+        db.collection("transactions")
             .add(incomeData)
             .addOnSuccessListener { documentReference ->
                 Log.i(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
