@@ -91,7 +91,7 @@ class MainFragment: Fragment() {
                     binding.totalExpenseAmount.text = viewModel.expenseTotal.toString()
                     binding.totalIncomeAmount.text = viewModel.incomeTotal.toString()
                     binding.totalBalanceAmount.text = (viewModel.incomeTotal - viewModel.expenseTotal).toString()
-                    binding.budgetList.adapter = context?.let { it1 -> ExpenseAdapter(transactionList, it1) }
+                    binding.budgetList.adapter = context?.let { it1 -> TransactionAdapter(transactionList, it1) }
                 }
             }
             .addOnFailureListener { e ->

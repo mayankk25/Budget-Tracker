@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgettracker.database.Transaction
 
 
-class ExpenseAdapter(private val expenseList: ArrayList<Transaction>, private val context: Context):
-    RecyclerView.Adapter<ExpenseAdapter.ViewHolder>() {
+class TransactionAdapter(private val transactionList: ArrayList<Transaction>, private val context: Context):
+    RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val titleText: TextView = itemView.findViewById(R.id.list_expense_title)
@@ -23,10 +23,10 @@ class ExpenseAdapter(private val expenseList: ArrayList<Transaction>, private va
         val cardViewLayout: CardView = itemView.findViewById(R.id.card_expense_icon)
     }
 
-    override fun getItemCount() = expenseList.size
+    override fun getItemCount() = transactionList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = expenseList[position]
+        val item = transactionList[position]
         //holder.textView.text = item.title.toString()
         holder.titleText.text = item.title
         holder.amountText.text = item.amount.toString()
