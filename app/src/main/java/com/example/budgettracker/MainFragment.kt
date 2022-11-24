@@ -30,6 +30,7 @@ class MainFragment: Fragment() {
     private var db = Firebase.firestore
 
     private lateinit var expenseList: ArrayList<Expense>
+    private lateinit var incomeList: ArrayList<Expense>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)

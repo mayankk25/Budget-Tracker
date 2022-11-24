@@ -7,14 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.example.budgettracker.databinding.AddTransactionFragmentBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AddTransactionFragment: Fragment() {
@@ -48,17 +43,12 @@ class AddTransactionFragment: Fragment() {
         override fun getItemCount(): Int {
             return 2
         }
-
         override fun createFragment(position: Int): Fragment {
             return when(position) {
-                0 -> ViewPagerFragment()
+                0 -> AddIncomeFragment()
                 1 -> AddExpenseFragment()
                 else -> throw RuntimeException("Invalid position: $position")
             }
         }
-    }
-
-    class ViewPagerFragment: Fragment(R.layout.create_account_fragment) {
-
     }
 }

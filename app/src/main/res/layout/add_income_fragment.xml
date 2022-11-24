@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/add_expense_fragment"
+        android:id="@+id/add_income_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenseTitle"
+            android:id="@+id/income_title"
             android:layout_width="350dp"
             android:layout_height="59dp"
             android:layout_margin="16dp"
@@ -31,7 +27,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenseAmount"
+            android:id="@+id/income_amount"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -41,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expenseTitle"
+            app:layout_constraintTop_toBottomOf="@+id/income_title"
             app:layout_constraintVertical_bias="0.00999999">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -53,7 +49,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenseMenu"
+            android:id="@+id/income_menu"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="350dp"
             android:layout_height="61dp"
@@ -64,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expenseAmount"
+            app:layout_constraintTop_toBottomOf="@+id/income_amount"
             app:layout_constraintVertical_bias="0.01999998">
 
             <AutoCompleteTextView
@@ -75,7 +71,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/expenseDate"
+            android:id="@+id/income_date"
             android:layout_width="350dp"
             android:layout_height="58dp"
             android:layout_margin="16dp"
@@ -89,11 +85,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expenseMenu"
+            app:layout_constraintTop_toBottomOf="@+id/income_menu"
             app:layout_constraintVertical_bias="0.01999998">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/expense_date_input"
+                android:id="@+id/income_date_input"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:cursorVisible="false"
@@ -105,7 +101,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/submitButton"
+            android:id="@+id/income_submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -115,9 +111,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.106"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expenseDate"
+            app:layout_constraintTop_toBottomOf="@+id/income_date"
             app:layout_constraintVertical_bias="0.086" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
