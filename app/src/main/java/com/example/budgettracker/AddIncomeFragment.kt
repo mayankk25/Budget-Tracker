@@ -71,7 +71,7 @@ class AddIncomeFragment: Fragment() {
         val incomeData = Transaction(
             "${auth.currentUser?.uid}",
             "${binding.incomeTitle.editText?.text.toString()}",
-            binding.incomeAmount.editText?.text.toString().toDouble(), //amount
+            binding.incomeAmount.editText?.text.toString().toInt(), //amount
             "${binding.incomeMenu.editText?.text.toString()}",
             "${binding.incomeDate.editText?.text.toString()}",
             "Income"

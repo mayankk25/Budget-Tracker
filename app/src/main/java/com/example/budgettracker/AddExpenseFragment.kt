@@ -75,7 +75,7 @@ class AddExpenseFragment: Fragment() {
         val expenseData = Transaction(
             "${auth.currentUser?.uid}",
             "${binding.expenseTitle.editText?.text.toString()}",
-            binding.expenseAmount.editText?.text.toString().toDouble(), //amount
+            binding.expenseAmount.editText?.text.toString().toInt(), //amount
         "${binding.expenseMenu.editText?.text.toString()}",
             "${binding.expenseDate.editText?.text.toString()}",
             "Expense"

@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.math.BigDecimal
 
 class MainFragment: Fragment() {
     private val TAG = "MainFragment"
@@ -72,8 +73,8 @@ class MainFragment: Fragment() {
             .get()
             .addOnSuccessListener {
                 if(!it.isEmpty) {
-                    viewModel.expenseTotal = 0.0 // adding this to make sure that everytime going back the expenses do not double
-                    viewModel.incomeTotal = 0.0
+                    viewModel.expenseTotal = 0 // adding this to make sure that everytime going back the expenses do not double
+                    viewModel.incomeTotal = 0
                     for (data in it.documents) {
                         val transaction: Transaction? = data.toObject(Transaction::class.java)
                         if (transaction != null) {

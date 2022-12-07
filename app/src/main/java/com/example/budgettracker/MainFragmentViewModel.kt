@@ -4,11 +4,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.math.BigDecimal
 
 class MainFragmentViewModel: ViewModel() {
 
-    var expenseTotal: Double = 0.0
-    var incomeTotal: Double = 0.0
+    var expenseTotal: Int = 0
+    var incomeTotal: Int = 0
 
     override fun onCleared() {
         super.onCleared()
