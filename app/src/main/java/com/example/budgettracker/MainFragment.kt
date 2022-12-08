@@ -100,6 +100,18 @@ class MainFragment: Fragment() {
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
             }
 
+        binding.bottomAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.budget_goals -> {
+                    // Handle accelerator icon press
+                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToBudgetGoalsFragment2())
+                    true
+                }
+                else -> false
+            }
+        }
+
+
         //getting all the expenses
 //        db.collection("expenses")
 //            .whereEqualTo("userID", currentUser?.uid.toString())

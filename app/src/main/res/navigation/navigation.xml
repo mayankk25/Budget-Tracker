@@ -24,11 +24,11 @@
         android:label="MainFragment"
         tools:layout="@layout/main_fragment" >
         <action
-            android:id="@+id/action_mainFragment_to_addExpenseFragment2"
-            app:destination="@id/addExpenseFragment2" />
-        <action
             android:id="@+id/action_mainFragment_to_addTransactionFragment"
             app:destination="@id/addTransactionFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_budgetGoalsFragment2"
+            app:destination="@id/budgetGoalsFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
@@ -40,15 +40,6 @@
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addExpenseFragment2"
-        android:name="com.example.budgettracker.AddExpenseFragment"
-        android:label="AddExpenseFragment"
-        tools:layout="@layout/add_expense_fragment">
-        <action
-            android:id="@+id/action_addExpenseFragment2_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/addTransactionFragment"
         android:name="com.example.budgettracker.AddTransactionFragment"
         android:label="AddTransactionFragment"
@@ -57,4 +48,9 @@
             android:id="@+id/action_addTransactionFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/budgetGoalsFragment"
+        android:name="com.example.budgettracker.BudgetGoalsFragment"
+        android:label="BudgetGoalsFragment"
+        tools:layout="@layout/budget_goals_fragment"/>
 </navigation>
