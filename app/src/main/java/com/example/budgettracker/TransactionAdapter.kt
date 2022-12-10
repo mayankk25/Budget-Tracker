@@ -3,7 +3,6 @@ package com.example.budgettracker
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,15 +12,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgettracker.database.Transaction
 
 
-class TransactionAdapter(private val transactionList: ArrayList<Transaction>, private val context: Context):
+class TransactionAdapter(private val transactionList: ArrayList<Transaction>, private val listener: OnItemClickListener, private val context: Context):
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val titleText: TextView = itemView.findViewById(R.id.list_expense_title)
         val amountText: TextView = itemView.findViewById(R.id.list_expense_amount)
         val descriptionText: TextView = itemView.findViewById(R.id.list_expense_description)
         val iconImage: ImageView = itemView.findViewById(R.id.image_expense_icon)
         val cardViewLayout: CardView = itemView.findViewById(R.id.card_expense_icon)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 
     override fun getItemCount() = transactionList.size

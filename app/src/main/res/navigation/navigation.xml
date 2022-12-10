@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_mainFragment_to_budgetGoalsFragment2"
             app:destination="@id/budgetGoalsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_editTransactionDialogFragment2"
+            app:destination="@id/editTransactionDialogFragment2" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
@@ -53,4 +56,16 @@
         android:name="com.example.budgettracker.BudgetGoalsFragment"
         android:label="BudgetGoalsFragment"
         tools:layout="@layout/budget_goals_fragment"/>
+    <fragment
+        android:id="@+id/editTransactionDialogFragment2"
+        android:name="com.example.budgettracker.EditTransactionDialogFragment"
+        android:label="EditTransactionDialogFragment"
+        tools:layout="@layout/edit_transaction_dialog">
+        <argument
+            android:name="clickedItem"
+            app:argType="com.example.budgettracker.database.Transaction" />
+        <action
+            android:id="@+id/action_editTransactionDialogFragment2_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

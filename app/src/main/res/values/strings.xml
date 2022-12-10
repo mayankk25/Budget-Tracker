@@ -13,6 +13,7 @@
     <string name="amount_hint">Amount</string>
     <string name="description_hint">Description</string>
     <string name="submit">Submit</string>
+    <string name="save">Save</string>
     <string name="date_hint">Date</string>
     <string name="select_date">Select date</string>
     <string name="recent_transactions">Recent transactions</string>
@@ -20,4 +21,5 @@
     <string name="total_balance">Total Balance</string>
     <string name="income">Income</string>
     <string name="budget_goals">Budget Goals</string>
+    <string name="edit_transaction">Edit Transaction</string>
 </resources>

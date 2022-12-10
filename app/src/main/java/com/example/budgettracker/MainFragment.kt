@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.budgettracker.database.Transaction
@@ -20,7 +22,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.math.BigDecimal
 
-class MainFragment: Fragment() {
+class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener {
     private val TAG = "MainFragment"
 
     private lateinit var auth: FirebaseAuth
@@ -30,6 +32,7 @@ class MainFragment: Fragment() {
     private lateinit var expenseList: ArrayList<Transaction>
     private lateinit var incomeList: ArrayList<Transaction>
     private lateinit var transactionList: ArrayList<Transaction>
+    private lateinit var adapter: TransactionAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -66,6 +69,8 @@ class MainFragment: Fragment() {
         incomeList = arrayListOf()
         transactionList = arrayListOf()
 
+
+        adapter = context?.let { TransactionAdapter(transactionList, this, it) }!!
         //getting all transactions
         db.collection("transactions")
             .orderBy("date", Query.Direction.DESCENDING)
@@ -92,7 +97,7 @@ class MainFragment: Fragment() {
                     binding.totalExpenseAmount.text = viewModel.expenseTotal.toString()
                     binding.totalIncomeAmount.text = viewModel.incomeTotal.toString()
                     binding.totalBalanceAmount.text = (viewModel.incomeTotal - viewModel.expenseTotal).toString()
-                    binding.budgetList.adapter = context?.let { it1 -> TransactionAdapter(transactionList, it1) }
+                    binding.budgetList.adapter = adapter
                 }
             }
             .addOnFailureListener { e ->
@@ -100,6 +105,8 @@ class MainFragment: Fragment() {
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
             }
 
+
+        //Budget Goals Fragment
         binding.bottomAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.budget_goals -> {
@@ -111,55 +118,34 @@ class MainFragment: Fragment() {
             }
         }
 
-
-        //getting all the expenses
-//        db.collection("expenses")
-//            .whereEqualTo("userID", currentUser?.uid.toString())
-//            .whereEqualTo("type", "Expense")
-//            .get()
-//            .addOnSuccessListener {
-//                if(!it.isEmpty) {
-//                    viewModel.expenseTotal = 0.0 // adding this to make sure that everytime going back the expenses do not double
-//                    for (data in it.documents) {
-//                        val expense: Transaction? = data.toObject(Transaction::class.java)
-//                        if (expense != null) {
-//                            expenseList.add(expense)
-//                            viewModel.expenseTotal += expense.amount!!
-//                        }
-//                    }
-//                    binding.totalExpenseAmount.text = viewModel.expenseTotal.toString()
-//                    binding.budgetList.adapter =
-//                        context?.let { it1 -> ExpenseAdapter(expenseList, it1) }
-//                }
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-//            }
-//
-//        Log.i(TAG, "Before getting income")
-//
-//        db.collection("income")
-//            .whereEqualTo("userID", currentUser?.uid.toString())
-//            .get()
-//            .addOnSuccessListener {
-//                if(!it.isEmpty) {
-//                    viewModel.incomeTotal = 0.0 // adding this to make sure that everytime going back the expenses do not double
-//                    for (data in it.documents) {
-//                        val income: Transaction? = data.toObject(Transaction::class.java)
-//                        if (income != null) {
-//                            incomeList.add(income)
-//                            viewModel.incomeTotal += income.amount!!
-//                        }
-//                    }
-//                    binding.totalIncomeAmount.text = viewModel.incomeTotal.toString()
-//                    //binding.budgetList.adapter = context?.let { it1 -> ExpenseAdapter(incomeList, it1) }
-//                }
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-//            }
-
         return binding.root
     }
 
+    override fun onItemClick(position: Int) {
+        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
+        val clickedItem = transactionList[position]
+        //changes the title for the clicked item temporarily. If the main fragment page is shown again, it will be removed
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToEditTransactionDialogFragment2(clickedItem))
+        adapter?.notifyItemChanged(position)
+    }
+
+//    fun showDialog(transactions: ArrayList<Transaction>, position: Int) {
+//        val fragmentManager = requireActivity().supportFragmentManager
+//        val newFragment = EditTransactionDialogFragment(transactions, position)
+//        if (false) {
+//            // The device is using a large layout, so show the fragment as a dialog
+//            newFragment.show(fragmentManager, "dialog")
+//        } else {
+//            // The device is smaller, so show the fragment fullscreen
+//            val transaction = fragmentManager.beginTransaction()
+//            // For a little polish, specify a transition animation
+//            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//            // To make it fullscreen, use the 'content' root view as the container
+//            // for the fragment, which is always the root view for the activity
+//            transaction
+//                .add(android.R.id.content, newFragment)
+//                .addToBackStack(null)
+//                .commit()
+//        }
+//    }
 }
