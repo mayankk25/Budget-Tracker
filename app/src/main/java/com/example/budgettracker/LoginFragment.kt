@@ -38,10 +38,12 @@ class LoginFragment: Fragment() {
         }
 
         binding.SignInButton.setOnClickListener {
-            val email = binding.editTextTextEmailAddress.text.toString()
-            val password = binding.editTextTextPassword.text.toString()
+            val email = binding.emailInput.text.toString()
+            val password = binding.passwordInput.text.toString()
             signIn(email, password)
         }
+
+        binding.imageView.setImageResource(R.drawable.wallet)
 
         //Initialize Firebase
         auth = Firebase.auth

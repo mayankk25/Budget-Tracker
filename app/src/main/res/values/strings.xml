@@ -23,4 +23,8 @@
     <string name="budget_goals">Budget Goals</string>
     <string name="edit_transaction">Edit Transaction</string>
     <string name="remove_transaction">Remove Transaction</string>
+    <string name="or">or</string>
+    <string name="krystal">Krystal</string>
+    <string name="app_desc">Track. Manage. Budget.</string>
+
 </resources>
