@@ -26,5 +26,6 @@
     <string name="or">or</string>
     <string name="krystal">Krystal</string>
     <string name="app_desc">Track. Manage. Budget.</string>
+    <string name="log_out">Log Out</string>
 
 </resources>

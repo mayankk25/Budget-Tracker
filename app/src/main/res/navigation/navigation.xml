@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_mainFragment_to_editTransactionDialogFragment2"
             app:destination="@id/editTransactionDialogFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
@@ -41,6 +44,9 @@
         <action
             android:id="@+id/action_createAccountFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_createAccountFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTransactionFragment"

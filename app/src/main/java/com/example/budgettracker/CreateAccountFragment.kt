@@ -31,10 +31,12 @@ class CreateAccountFragment: Fragment() {
             R.layout.create_account_fragment, container, false)
 
         binding.CreateAccountButton2.setOnClickListener {
-            val email = binding.EmailField.text.toString()
-            val password = binding.PasswordField.text.toString()
+            val email = binding.createAccountEmailInput.text.toString()
+            val password = binding.createAccountPasswordInput.text.toString()
             createAccount(binding, email, password)
         }
+
+        binding.imageView.setImageResource(R.drawable.wallet)
 
         //Initialize Firebase
         auth = Firebase.auth
@@ -59,7 +61,7 @@ class CreateAccountFragment: Fragment() {
                 Toast.makeText(context, "Created Account.", Toast.LENGTH_SHORT).show()
 
                 val userData = hashMapOf(
-                    "name" to binding.NameField.text.toString(),
+                    "name" to binding.createAccountNameInput.text.toString(),
                     "email" to email,
                     "id" to user?.uid
                 )
@@ -69,6 +71,7 @@ class CreateAccountFragment: Fragment() {
                     .addOnSuccessListener { documentReference ->
                         Log.i(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
                         Toast.makeText(context, "Created collection.", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(CreateAccountFragmentDirections.actionCreateAccountFragmentToLoginFragment())
                     }
                     .addOnFailureListener { e ->
                         Log.i(TAG, "Error adding document", e)

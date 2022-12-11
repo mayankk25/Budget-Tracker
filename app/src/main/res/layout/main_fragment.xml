@@ -25,6 +25,21 @@
             app:layout_constraintVertical_bias="0.0"
             tools:text="Mayank" />
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/log_out"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/coordinatorLayout2"
+            app:layout_constraintVertical_bias="0.0" />
+
         <TextView
             android:id="@+id/total_balance"
             android:layout_width="match_parent"
@@ -47,7 +62,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/product_sans_bold"
-            android:text="TextView"
+            android:text="$0"
             android:textColor="@color/black"
             android:textSize="80dp"
             app:layout_constraintBottom_toTopOf="@+id/materialCardView"
@@ -90,10 +105,11 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-
+                    android:text="$0"
                     android:fontFamily="@font/product_sans_bold"
                     android:textSize="35dp"
                     tools:text="5000" />
+
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -133,6 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
+                    android:text="$0"
                     android:fontFamily="@font/product_sans_bold"
                     android:textSize="35dp"
                     tools:text="5000"></TextView>
@@ -156,18 +173,20 @@
 
         <TextView
             android:id="@+id/welcome_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="267dp"
+            android:layout_height="43dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/product_sans_bold"
             android:text="@string/welcome"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/coordinatorLayout2"
+            app:layout_constraintEnd_toStartOf="@id/button"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.01999998" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/budget_list"
@@ -206,7 +225,6 @@
                 android:layout_gravity="bottom"
                 app:layout_anchor="@+id/nestedScrollView"
                 app:layout_anchorGravity="bottom|center"
-                app:menu="@menu/bottom_navigation_menu"
                 app:navigationIcon="@drawable/ic_baseline_menu_24" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -104,17 +104,11 @@ class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener, Transact
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
             }
 
-        //Budget Goals Fragment
-        binding.bottomAppBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.budget_goals -> {
-                    // Handle accelerator icon press
-                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToBudgetGoalsFragment2())
-                    true
-                }
-                else -> false
-            }
+        binding.button.setOnClickListener {
+            Firebase.auth.signOut()
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToLoginFragment())
         }
+
         return binding.root
     }
 
