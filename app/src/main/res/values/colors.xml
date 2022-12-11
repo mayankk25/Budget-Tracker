@@ -21,4 +21,7 @@
     <color name="purple">#673AB7</color>
     <color name="light_purple">#C5B5E1</color>
     <color name="light_teal">#AFD6D2</color>
+    <color name="dark_green">#074700</color>
+    <color name="dark_blue2">#001F7C</color>
+    <color name="dark_yellow">#FF9800</color>
 </resources>

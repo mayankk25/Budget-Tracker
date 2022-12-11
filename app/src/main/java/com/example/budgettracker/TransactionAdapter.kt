@@ -1,6 +1,9 @@
 package com.example.budgettracker
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Color.RED
+import android.graphics.Color.red
 import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.view.*
 import android.view.View.OnLongClickListener
@@ -62,9 +65,12 @@ class TransactionAdapter(private val transactionList: ArrayList<Transaction>, pr
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = transactionList[position]
-        //holder.textView.text = item.title.toString()
         holder.titleText.text = item.title
-        holder.amountText.text = item.amount.toString()
+        when (item.type) {
+            "Expense" -> holder.amountText.setTextColor(getColor(context, R.color.red))
+            else -> holder.amountText.setTextColor(getColor(context, R.color.green))
+        }
+        holder.amountText.text = "$" + item.amount.toString()
         holder.descriptionText.text = item.date
         holder.iconImage.setImageResource (
             when (item.category) {
@@ -74,6 +80,9 @@ class TransactionAdapter(private val transactionList: ArrayList<Transaction>, pr
                 "Education" -> R.drawable.ic_round_school_24
                 "Health" -> R.drawable.ic_round_health_and_safety_24
                 "Self-Development" -> R.drawable.ic_round_self_development_24
+                "Salary" -> R.drawable.ic_round_monetization_on_24
+                "Bonus" -> R.drawable.ic_baseline_workspace_premium_24
+                "Allowance" -> R.drawable.ic_baseline_money_24
                 else -> R.drawable.ic_round_add_circle_24
             }
         )
@@ -85,6 +94,9 @@ class TransactionAdapter(private val transactionList: ArrayList<Transaction>, pr
                 "Education" -> getColor(context, R.color.green)
                 "Health" -> getColor(context, R.color.red)
                 "Self-Development" -> getColor(context, R.color.purple)
+                "Salary" -> getColor(context, R.color.dark_green)
+                "Bonus" -> getColor(context, R.color.dark_blue2)
+                "Allowance" -> getColor(context, R.color.dark_yellow)
                 else -> getColor(context, R.color.teal_700)
             }
         )
@@ -96,6 +108,8 @@ class TransactionAdapter(private val transactionList: ArrayList<Transaction>, pr
                 "Education" -> getColor(context, R.color.light_green)
                 "Health" -> getColor(context, R.color.light_red)
                 "Self-Development" -> getColor(context, R.color.light_purple)
+                "Salary" -> getColor(context, R.color.light_green)
+                "Bonus" -> getColor(context, R.color.light_yellow)
                 else -> getColor(context, R.color.light_teal)
             }
         )

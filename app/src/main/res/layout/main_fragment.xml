@@ -49,7 +49,7 @@
             android:fontFamily="@font/product_sans_bold"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="60dp"
+            android:textSize="80dp"
             app:layout_constraintBottom_toTopOf="@+id/materialCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

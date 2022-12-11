@@ -93,9 +93,9 @@ class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener, Transact
                             }
                         }
                     }
-                    binding.totalExpenseAmount.text = viewModel.expenseTotal.toString()
-                    binding.totalIncomeAmount.text = viewModel.incomeTotal.toString()
-                    binding.totalBalanceAmount.text = (viewModel.incomeTotal - viewModel.expenseTotal).toString()
+                    binding.totalExpenseAmount.text = "$" + viewModel.expenseTotal.toString()
+                    binding.totalIncomeAmount.text = "$" + viewModel.incomeTotal.toString()
+                    binding.totalBalanceAmount.text = "$" + (viewModel.incomeTotal - viewModel.expenseTotal).toString()
                     binding.budgetList.adapter = adapter
                 }
             }
@@ -115,7 +115,6 @@ class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener, Transact
                 else -> false
             }
         }
-
         return binding.root
     }
 
@@ -132,23 +131,4 @@ class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener, Transact
         val clickedItem = transactionList[position]
         adapter?.notifyItemChanged(position)
     }
-
-//    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-//        super.onCreateContextMenu(menu, v, menuInfo)
-//        val inflater: MenuInflater = requireActivity().menuInflater
-//        inflater.inflate(R.menu.item_menu, menu)
-//    }
-//
-//    override fun onContextItemSelected(item: MenuItem): Boolean {
-//        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
-//        return when (item.itemId) {
-//            R.id.edit_option -> {
-//                true
-//            }
-//            R.id.remove_option -> {
-//                true
-//            }
-//            else -> super.onContextItemSelected(item)
-//        }
-//    }
 }
