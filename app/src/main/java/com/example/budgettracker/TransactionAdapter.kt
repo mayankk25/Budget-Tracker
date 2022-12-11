@@ -1,21 +1,28 @@
 package com.example.budgettracker
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
+import android.view.*
+import android.view.View.OnLongClickListener
+import android.widget.AdapterView
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.getColor
+import androidx.databinding.adapters.ViewBindingAdapter.setOnLongClickListener
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgettracker.database.Transaction
+import kotlinx.coroutines.NonCancellable.cancel
 
 
-class TransactionAdapter(private val transactionList: ArrayList<Transaction>, private val listener: OnItemClickListener, private val context: Context):
+class TransactionAdapter(private val transactionList: ArrayList<Transaction>, private val listener: OnItemClickListener,
+                         private val longClickListener: OnLongClickListener, private val context: Context):
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
         val titleText: TextView = itemView.findViewById(R.id.list_expense_title)
         val amountText: TextView = itemView.findViewById(R.id.list_expense_amount)
         val descriptionText: TextView = itemView.findViewById(R.id.list_expense_description)
@@ -24,6 +31,7 @@ class TransactionAdapter(private val transactionList: ArrayList<Transaction>, pr
 
         init {
             itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
         }
 
         override fun onClick(p0: View?) {
@@ -32,10 +40,22 @@ class TransactionAdapter(private val transactionList: ArrayList<Transaction>, pr
                 listener.onItemClick(position)
             }
         }
+
+        override fun onLongClick(p0: View?): Boolean {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                longClickListener.onItemLongClick(position, itemView)
+            }
+            return true
+        }
     }
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
+    }
+
+    interface OnLongClickListener {
+        fun onItemLongClick(position: Int, itemView: View)
     }
 
     override fun getItemCount() = transactionList.size

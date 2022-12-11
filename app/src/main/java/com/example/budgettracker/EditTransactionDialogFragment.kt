@@ -27,6 +27,7 @@ import com.google.firebase.ktx.Firebase
 import java.lang.reflect.Array.get
 import java.text.SimpleDateFormat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import java.util.*
 
 class EditTransactionDialogFragment(): Fragment() {
@@ -41,6 +42,8 @@ class EditTransactionDialogFragment(): Fragment() {
             R.layout.edit_transaction_dialog, container, false)
 
         auth = Firebase.auth
+
+        binding.lifecycleOwner = this
 
         binding.topAppBar.setNavigationOnClickListener {
             findNavController().navigate(EditTransactionDialogFragmentDirections.actionEditTransactionDialogFragment2ToMainFragment())
@@ -103,35 +106,25 @@ class EditTransactionDialogFragment(): Fragment() {
                         e -> Log.w(TAG, "Error writing document", e)
                     Toast.makeText(context, "Error updating transaction", Toast.LENGTH_SHORT).show()
                 }
+
+            findNavController().navigate(EditTransactionDialogFragmentDirections.actionEditTransactionDialogFragment2ToMainFragment())
+        }
+
+        binding.removeButton.setOnClickListener {
+            val docRef = db.collection("transactions").document(args.clickedItem.transactionID!!)
+            docRef
+                .delete()
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Deleted Transaction", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "DocumentSnapshot successfully written!")
+                }
+                .addOnFailureListener {
+                        e -> Log.w(TAG, "Error deleting document", e)
+                    Toast.makeText(context, "Error updating transaction", Toast.LENGTH_SHORT).show()
+                }
+            findNavController().navigate(EditTransactionDialogFragmentDirections.actionEditTransactionDialogFragment2ToMainFragment())
         }
 
         return binding.root
     }
-
-//    private lateinit var binding: EditTransactionDialogBinding
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-//        // Inflate the layout to use as dialog or embedded fragment
-//        binding = DataBindingUtil.inflate(inflater, R.layout.edit_transaction_dialog, container, false)
-//
-//        binding.topAppBar.setNavigationOnClickListener {
-//            //findNavController().navigate(EditTransactionDialogFragmentDirections.actionEditTransactionDialogFragmentToMainFragment())
-//            var clickedItem = transactions[position]
-//            clickedItem.title = "Clicked"
-//            dismiss()
-//        }
-//
-//        return binding.root
-//        //return inflater.inflate(R.layout.edit_transaction_dialog, container, false)
-//    }
-//
-//    /** The system calls this only when creating the layout in a dialog. */
-//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//        // The only reason you might override this method when using onCreateView() is
-//        // to modify any dialog characteristics. For example, the dialog includes a
-//        // title by default, but your custom layout might not need it. So here you can
-//        // remove the dialog title, but you must call the superclass to get the Dialog.
-//        val dialog = super.onCreateDialog(savedInstanceState)
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//        return dialog
-//    }
 }

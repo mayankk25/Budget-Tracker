@@ -2,10 +2,9 @@ package com.example.budgettracker
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Adapter
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,9 +19,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import io.grpc.InternalChannelz.id
 import java.math.BigDecimal
 
-class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener {
+class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener, TransactionAdapter.OnLongClickListener {
     private val TAG = "MainFragment"
 
     private lateinit var auth: FirebaseAuth
@@ -69,8 +69,7 @@ class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener {
         incomeList = arrayListOf()
         transactionList = arrayListOf()
 
-
-        adapter = context?.let { TransactionAdapter(transactionList, this, it) }!!
+        adapter = context?.let { TransactionAdapter(transactionList, this, this, it) }!!
         //getting all transactions
         db.collection("transactions")
             .orderBy("date", Query.Direction.DESCENDING)
@@ -105,7 +104,6 @@ class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener {
                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
             }
 
-
         //Budget Goals Fragment
         binding.bottomAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -122,30 +120,35 @@ class MainFragment: Fragment(), TransactionAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
         val clickedItem = transactionList[position]
         //changes the title for the clicked item temporarily. If the main fragment page is shown again, it will be removed
         findNavController().navigate(MainFragmentDirections.actionMainFragmentToEditTransactionDialogFragment2(clickedItem))
         adapter?.notifyItemChanged(position)
     }
 
-//    fun showDialog(transactions: ArrayList<Transaction>, position: Int) {
-//        val fragmentManager = requireActivity().supportFragmentManager
-//        val newFragment = EditTransactionDialogFragment(transactions, position)
-//        if (false) {
-//            // The device is using a large layout, so show the fragment as a dialog
-//            newFragment.show(fragmentManager, "dialog")
-//        } else {
-//            // The device is smaller, so show the fragment fullscreen
-//            val transaction = fragmentManager.beginTransaction()
-//            // For a little polish, specify a transition animation
-//            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//            // To make it fullscreen, use the 'content' root view as the container
-//            // for the fragment, which is always the root view for the activity
-//            transaction
-//                .add(android.R.id.content, newFragment)
-//                .addToBackStack(null)
-//                .commit()
+    override fun onItemLongClick(position: Int, itemView: View) {
+        Toast.makeText(context, "Item $position long clicked", Toast.LENGTH_SHORT).show()
+        val clickedItem = transactionList[position]
+        adapter?.notifyItemChanged(position)
+    }
+
+//    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+//        super.onCreateContextMenu(menu, v, menuInfo)
+//        val inflater: MenuInflater = requireActivity().menuInflater
+//        inflater.inflate(R.menu.item_menu, menu)
+//    }
+//
+//    override fun onContextItemSelected(item: MenuItem): Boolean {
+//        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+//        return when (item.itemId) {
+//            R.id.edit_option -> {
+//                true
+//            }
+//            R.id.remove_option -> {
+//                true
+//            }
+//            else -> super.onContextItemSelected(item)
 //        }
 //    }
 }
