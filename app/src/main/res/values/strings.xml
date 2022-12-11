@@ -27,5 +27,7 @@
     <string name="krystal">Krystal</string>
     <string name="app_desc">Track. Manage. Budget.</string>
     <string name="log_out">Log Out</string>
+    <string name="empty_password">Please enter a password</string>
+    <string name="empty_email">Please enter a email</string>
 
 </resources>

@@ -31,9 +31,25 @@ class CreateAccountFragment: Fragment() {
             R.layout.create_account_fragment, container, false)
 
         binding.CreateAccountButton2.setOnClickListener {
+            val name = binding.createAccountNameInput.text.toString()
             val email = binding.createAccountEmailInput.text.toString()
             val password = binding.createAccountPasswordInput.text.toString()
-            createAccount(binding, email, password)
+            if (name != "" && email != "" && password != "") {
+                createAccount(email, password, name)
+            } else {
+                if (name == "") {
+                    binding.createAccountName.isErrorEnabled = true
+                    binding.createAccountName.error = getString(R.string.empty_email)
+                } else { binding.createAccountName.isErrorEnabled = false }
+                if (email == "") {
+                    binding.createAccountEmail.isErrorEnabled = true
+                    binding.createAccountEmail.error = getString(R.string.empty_email)
+                } else { binding.createAccountEmail.isErrorEnabled = false }
+                if (password == "") {
+                    binding.createAccountPassword.isErrorEnabled = true
+                    binding.createAccountPassword.error = getString(R.string.empty_email)
+                } else { binding.createAccountPassword.isErrorEnabled = false }
+            }
         }
 
         binding.imageView.setImageResource(R.drawable.wallet)
@@ -52,7 +68,7 @@ class CreateAccountFragment: Fragment() {
         }
     }
 
-    private fun createAccount(binding: CreateAccountFragmentBinding, email: String, password: String) {
+    private fun createAccount(email: String, password: String, name: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
                 // Sign in success, update UI with the signed-in user's information
@@ -61,7 +77,7 @@ class CreateAccountFragment: Fragment() {
                 Toast.makeText(context, "Created Account.", Toast.LENGTH_SHORT).show()
 
                 val userData = hashMapOf(
-                    "name" to binding.createAccountNameInput.text.toString(),
+                    "name" to name,
                     "email" to email,
                     "id" to user?.uid
                 )

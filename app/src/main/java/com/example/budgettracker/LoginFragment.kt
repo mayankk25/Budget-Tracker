@@ -40,10 +40,19 @@ class LoginFragment: Fragment() {
         binding.SignInButton.setOnClickListener {
             val email = binding.emailInput.text.toString()
             val password = binding.passwordInput.text.toString()
-            signIn(email, password)
+            if (email == "" || password == "") {
+                binding.email.isErrorEnabled = true
+                binding.email.error = getString(R.string.empty_email)
+                binding.password.isErrorEnabled = true
+                binding.password.error = getString(R.string.empty_password)
+                //binding.passwordInput.error = getString(R.string.amount_hint)
+            } else {
+                signIn(email, password)
+            }
         }
 
         binding.imageView.setImageResource(R.drawable.wallet)
+
 
         //Initialize Firebase
         auth = Firebase.auth
