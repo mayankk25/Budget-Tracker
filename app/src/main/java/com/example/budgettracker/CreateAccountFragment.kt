@@ -52,7 +52,7 @@ class CreateAccountFragment: Fragment() {
             }
         }
 
-        binding.imageView.setImageResource(R.drawable.wallet)
+        binding.imageView.setImageResource(R.drawable.ic_baseline_wallet_24)
 
         //Initialize Firebase
         auth = Firebase.auth
