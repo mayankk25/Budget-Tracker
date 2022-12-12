@@ -14,6 +14,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class AddTransactionFragment: Fragment() {
 
+    private val TAG = "AddTransactionFragment"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: AddTransactionFragmentBinding = DataBindingUtil.inflate(
             inflater, R.layout.add_transaction_fragment, container, false)
