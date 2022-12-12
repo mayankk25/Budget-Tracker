@@ -24,6 +24,7 @@
             app:layout_constraintVertical_bias="0.0">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/expense_title_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/product_sans_regular"
@@ -45,6 +46,7 @@
             app:layout_constraintVertical_bias="0.00999999">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/expense_amount_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/product_sans_regular"
@@ -68,6 +70,7 @@
             app:layout_constraintVertical_bias="0.01999998">
 
             <AutoCompleteTextView
+                android:id="@+id/expense_menu_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/product_sans_regular"

@@ -34,7 +34,30 @@ class AddIncomeFragment: Fragment() {
         auth = Firebase.auth
 
         binding.incomeSubmitButton.setOnClickListener{
-            addIncome(binding, auth)
+            val title = binding.incomeTitle.editText?.text.toString()
+            val amount = binding.incomeAmount.editText?.text.toString()
+            val category = binding.incomeMenu.editText?.text.toString()
+            val date = binding.incomeDate.editText?.text.toString()
+            if (title != "" && amount != "" && category != "" && date != "") {
+                addIncome(binding, auth)
+            } else {
+                if (title == "") {
+                    binding.incomeTitle.isErrorEnabled = true
+                    binding.incomeTitle.error = getString(R.string.error)
+                } else { binding.incomeTitle.isErrorEnabled = false }
+                if (amount == "") {
+                    binding.incomeAmount.isErrorEnabled = true
+                    binding.incomeAmount.error = getString(R.string.error)
+                } else { binding.incomeAmount.isErrorEnabled = false }
+                if (category == "") {
+                    binding.incomeMenu.isErrorEnabled = true
+                    binding.incomeMenu.error = getString(R.string.error)
+                } else { binding.incomeMenu.isErrorEnabled = false }
+                if (date == "") {
+                    binding.incomeDate.isErrorEnabled = true
+                    binding.incomeDate.error = getString(R.string.error)
+                } else { binding.incomeDate.isErrorEnabled = false }
+            }
         }
 
         val items = arrayOf("Salary", "Bonus", "Allowance", "Other")

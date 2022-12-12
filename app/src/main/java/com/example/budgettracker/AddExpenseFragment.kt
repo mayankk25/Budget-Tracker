@@ -37,7 +37,30 @@ class AddExpenseFragment: Fragment() {
         auth = Firebase.auth
 
         binding.submitButton.setOnClickListener{
-            addExpense(binding, auth)
+            val title = binding.expenseTitle.editText?.text.toString()
+            val amount = binding.expenseAmount.editText?.text.toString()
+            val category = binding.expenseMenu.editText?.text.toString()
+            val date = binding.expenseDate.editText?.text.toString()
+            if (title != "" && amount != "" && category != "" && date != "") {
+                addExpense(binding, auth)
+            } else {
+                if (title == "") {
+                    binding.expenseTitle.isErrorEnabled = true
+                    binding.expenseTitle.error = getString(R.string.error)
+                } else { binding.expenseTitle.isErrorEnabled = false }
+                if (amount == "") {
+                    binding.expenseAmount.isErrorEnabled = true
+                    binding.expenseAmount.error = getString(R.string.error)
+                } else { binding.expenseAmount.isErrorEnabled = false }
+                if (category == "") {
+                    binding.expenseMenu.isErrorEnabled = true
+                    binding.expenseMenu.error = getString(R.string.error)
+                } else { binding.expenseMenu.isErrorEnabled = false }
+                if (date == "") {
+                    binding.expenseDate.isErrorEnabled = true
+                    binding.expenseDate.error = getString(R.string.error)
+                } else { binding.expenseDate.isErrorEnabled = false }
+            }
         }
 
         val items = arrayOf("Food", "Transportation", "Entertainment", "Education", "Health", "Self-Development", "Other")
